@@ -15,52 +15,84 @@ int main(int argc, const char * argv[])
     FILE *fw;
     char str1[500];
     char str2[500];
-    char lat[500];
+    char date[50],lat[50],lon[50],spe[50],cor[50],alt[50];
     int i;
     fr=fopen("//Users//20161104574al//desktop//GPS170510.log","r+");
     fw=fopen("//Users//20161104574al//desktop//output.xls","w+");
+    
+    fprintf(fw,"时间,维度,经度,地面速率,航向,海拔\n");
     while(fscanf(fr,"%s%s",str1,str2)!=EOF)
     {
         printf("结果:%s\n%s\n",str1,str2);
         
-        for(i=0;i<6;i++)
-            lat[i]=str1[i+7];
-        lat[6]='\0';
-        printf("时间:%s\t",lat);
+        for(i=0;i<2;i++)
+            date[i]=str1[i+55];
+        date[2]='\0';
+        printf("时间：%s年",date);
+        
+        for(i=0;i<2;i++)
+            date[i]=str1[i+53];
+        date[2]='\0';
+        printf("%s月",date);
+        
+        for(i=0;i<2;i++)
+            date[i]=str1[i+51];
+        date[2]='\0';
+        printf("%s日",date);
+        
+        for(i=0;i<2;i++)
+            date[i]=str1[i+7];
+        date[2]='\0';
+        printf("%s时",date);
+        
+        for(i=0;i<2;i++)
+            date[i]=str1[i+9];
+        date[2]='\0';
+        printf("%s分",date);
+        
+        for(i=0;i<2;i++)
+            date[i]=str1[i+11];
+        date[2]='\0';
+        printf("%s秒\t",date);
         
         
-        for(i=0;i<10;i++)
+        for(i=0;i<8;i++)
             lat[i]=str1[i+16];
-        lat[10]='\0';
+        lat[8]='\0';
         printf("维度:%s\t",lat);
         
         
-        for(i=0;i<11;i++)
-            lat[i]=str1[i+27];
-        lat[11]='\0';
-        printf("经度:%s\t",lat);
+        for(i=0;i<9;i++)
+            lon[i]=str1[i+27];
+        lon[9]='\0';
+        printf("经度:%s\t",lon);
         
         
         for(i=0;i<5;i++)
-            lat[i]=str1[i+39];
-        lat[5]='\0';
-        printf("地面速率:%s\t",lat);
+            spe[i]=str1[i+39];
+        spe[5]='\0';
+        printf("地面速率:%s\t",spe);
         
         
         for(i=0;i<5;i++)
-            lat[i]=str1[i+45];
-        lat[5]='\0';
-        printf("航向:%s\t",lat);
+            cor[i]=str1[i+45];
+        cor[5]='\0';
+        printf("航向:%s\t",cor);
         
         
-        for(i=0;i<6;i++)
-            lat[i]=str1[i+51];
-        lat[6]='\0';
-        printf("日期：%s\n",lat);
+        for(i=0;i<4;i++)
+            alt[i]=str2[i+43];
+        alt[4]='\0';
+        printf("海拔:%s\n",alt);
+        
+        
+        fprintf(fw,"%s,%s,%s,%s,%s,%s\n",date,lat,lon,spe,cor,alt);
+        
+        
     }
     
     
     fclose(fr);
-    fclose(fw);
+
     return 0;
 }
