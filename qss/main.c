@@ -15,15 +15,15 @@ int main(int argc, const char * argv[])
     FILE *fw;
     char str1[500];
     char str2[500];
-    char date[50],lat[50],lon[50],spe[50],cor[50],alt[50];
+    char date[50],lat[50],sorn[50],lon[50],eorw[50],spe[50],cor[50],alt[50];
     int i;
     fr=fopen("//Users//20161104574al//desktop//GPS170510.log","r+");
-    fw=fopen("//Users//20161104574al//desktop//output.xls","w+");
+    fw=fopen("//Users//20161104574al//desktop//output.csv","w+");
     
-    fprintf(fw,"时间,维度,经度,地面速率,航向,海拔\n");
+    fprintf(fw,"时间,维度,南北维,经度,东西经,地面速率,航向,海拔\n");
     while(fscanf(fr,"%s%s",str1,str2)!=EOF)
     {
-        printf("结果:%s\n%s\n",str1,str2);
+        printf("结果:%s%s\n",str1,str2);
         
         for(i=0;i<2;i++)
             date[i]=str1[i+55];
@@ -59,13 +59,23 @@ int main(int argc, const char * argv[])
         for(i=0;i<8;i++)
             lat[i]=str1[i+16];
         lat[8]='\0';
-        printf("维度:%s\t",lat);
+        printf("维度:%s",lat);
+        
+        for(i=0;i<1;i++)
+            sorn[i]=str1[i+25];
+        sorn[1]='\0';
+        printf("%s\t",sorn);
         
         
         for(i=0;i<9;i++)
             lon[i]=str1[i+27];
         lon[9]='\0';
-        printf("经度:%s\t",lon);
+        printf("经度:%s",lon);
+        
+        for(i=0;i<1;i++)
+            eorw[i]=str1[i+37];
+        eorw[1]='\0';
+        printf("%s\t",eorw);
         
         
         for(i=0;i<5;i++)
@@ -83,10 +93,10 @@ int main(int argc, const char * argv[])
         for(i=0;i<4;i++)
             alt[i]=str2[i+43];
         alt[4]='\0';
-        printf("海拔:%s\n",alt);
+        printf("海拔:%s米\n",alt);
         
         
-        fprintf(fw,"%s,%s,%s,%s,%s,%s\n",date,lat,lon,spe,cor,alt);
+        fprintf(fw,"%s,%s,%s,%s,%s,%s,%s,%s\n",date,lat,sorn,lon,eorw,spe,cor,alt);
         
         
     }
