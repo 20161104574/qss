@@ -23,7 +23,7 @@ int main(int argc, const char * argv[]) {
     for(i=0;i<6;i++)
         lat[i]=str1[i+7];
     lat[6]='\0';
-    printf("时间:%s\t",lat);
+    while(printf("时间:%s\t",lat)!=EOF);
     
     
     for(i=0;i<10;i++)
@@ -50,7 +50,10 @@ int main(int argc, const char * argv[]) {
     printf("航向:%s\t",lat);
     
     
-    
+    for(i=0;i<6;i++)
+        lat[i]=str1[i+51];
+    lat[6]='\0';
+    printf("日期：%s\t",lat);
     
     fclose(fr);
     return 0;
